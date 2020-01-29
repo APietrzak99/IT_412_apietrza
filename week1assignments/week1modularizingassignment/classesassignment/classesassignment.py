@@ -48,7 +48,7 @@ while program_running == True:
 
         if initial_input == 'end':
             Validator.displayInformation(college_records)
-            exit()
+            program_running == False
     
 #name while loop
     person_name_correct = False
