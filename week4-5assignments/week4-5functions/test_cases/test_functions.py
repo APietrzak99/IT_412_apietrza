@@ -5,11 +5,11 @@ class NamePartTestCase(unittest.TestCase):
     """Tests for functions in the function_library.py file"""
 
     def test_name_part(self):
-        """Here is a bunch of values I think should not work"""
-        valid_names_to_test = ["Anthony", "anthony", "   Anthony", "Anthony    ", " anthony", "anthony   "]
+        """Here is a bunch of titles I think should work"""
+        valid_titles_to_test = ["Catcher     In The Rye", "   Stranger Things", "The things ThEy Carried", "As I Lay Dying    "]
 
-        for name in valid_names_to_test:
-            self.assertTrue(validate_name_part(name))
+        for title in valid_titles_to_test:
+            self.assertTrue(book_title(title))
 
     def test_invalid_name_part(self):
         """Here is a bunch of values I think should not work"""

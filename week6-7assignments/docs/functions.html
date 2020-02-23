@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module functions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>functions</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:g%3A%5Cit412%5Cit_412_apietrza%5Cweek6-7assignments%5Cfunctions%5Cfunctions.py">g:\it412\it_412_apietrza\week6-7assignments\functions\functions.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-book_add"><strong>book_add</strong></a>(passed_title, passed_author, passed_isbn, passed_copies_purchased, passed_copies_checked_out, passed_retail)</dt><dd><tt>passed&nbsp;values&nbsp;are&nbsp;added&nbsp;to&nbsp;book&nbsp;database&nbsp;using&nbsp;a&nbsp;sql&nbsp;insert&nbsp;statement.&nbsp;if&nbsp;passed_retail&nbsp;is&nbsp;empty,&nbsp;then&nbsp;the&nbsp;default&nbsp;value&nbsp;assigned&nbsp;will&nbsp;be&nbsp;0<br>
+arguments:<br>
+passed_title,&nbsp;passed_author,&nbsp;passed_isbn,&nbsp;passed_copies_purchased,passed_copies_checked_out,passed_retail<br>
+returns<br>
+nothing</tt></dd></dl>
+ <dl><dt><a name="-book_author"><strong>book_author</strong></a>(passed_author)</dt><dd><tt>passed&nbsp;author&nbsp;is&nbsp;validated&nbsp;to&nbsp;exist,&nbsp;then&nbsp;is&nbsp;tested&nbsp;for&nbsp;bad&nbsp;characters&nbsp;using&nbsp;the&nbsp;author_bad_chars&nbsp;list&nbsp;specified&nbsp;above<br>
+arguments:<br>
+passed_author<br>
+returns<br>
+True&nbsp;or&nbsp;False&nbsp;based&nbsp;on&nbsp;conditions&nbsp;met</tt></dd></dl>
+ <dl><dt><a name="-book_copies"><strong>book_copies</strong></a>(passed_copies)</dt><dd><tt>passed&nbsp;copies&nbsp;is&nbsp;validated&nbsp;to&nbsp;exist,&nbsp;then&nbsp;is&nbsp;converted&nbsp;to&nbsp;an&nbsp;int&nbsp;to&nbsp;test&nbsp;that&nbsp;it&nbsp;is&nbsp;a&nbsp;valid&nbsp;number<br>
+arguments:<br>
+passed_copies<br>
+returns<br>
+True&nbsp;or&nbsp;False&nbsp;based&nbsp;on&nbsp;conditions&nbsp;met</tt></dd></dl>
+ <dl><dt><a name="-book_delete"><strong>book_delete</strong></a>()</dt><dd><tt>asks&nbsp;the&nbsp;user&nbsp;for&nbsp;the&nbsp;ID&nbsp;of&nbsp;a&nbsp;book&nbsp;to&nbsp;delete&nbsp;from&nbsp;the&nbsp;database,&nbsp;and&nbsp;will&nbsp;delete&nbsp;said&nbsp;book<br>
+arguments:<br>
+none<br>
+returns:<br>
+none</tt></dd></dl>
+ <dl><dt><a name="-book_edit"><strong>book_edit</strong></a>(passed_column, passed_input, passed_id)</dt><dd><tt>is&nbsp;passed&nbsp;three&nbsp;pieces&nbsp;of&nbsp;data,&nbsp;that&nbsp;are&nbsp;then&nbsp;added&nbsp;to&nbsp;the&nbsp;sql&nbsp;statement&nbsp;below,&nbsp;which&nbsp;will&nbsp;update&nbsp;the&nbsp;record&nbsp;the&nbsp;user&nbsp;specified<br>
+and&nbsp;add&nbsp;the&nbsp;new&nbsp;data&nbsp;that&nbsp;they&nbsp;have&nbsp;specified<br>
+arguments:<br>
+passed_column,passed_input,passed_id<br>
+returns:<br>
+none</tt></dd></dl>
+ <dl><dt><a name="-book_isbn"><strong>book_isbn</strong></a>(passed_isbn)</dt><dd><tt>passed&nbsp;isbn&nbsp;is&nbsp;validated&nbsp;to&nbsp;exist,&nbsp;then&nbsp;is&nbsp;tested&nbsp;for&nbsp;characters&nbsp;using&nbsp;the&nbsp;isbn_good_chars&nbsp;list&nbsp;specified&nbsp;above.&nbsp;if&nbsp;all&nbsp;characters&nbsp;within&nbsp;the&nbsp;isbn&nbsp;are&nbsp;good,&nbsp;then&nbsp;the&nbsp;return&nbsp;will&nbsp;be&nbsp;true<br>
+arguments:<br>
+passed_isbn<br>
+returns<br>
+True&nbsp;or&nbsp;False&nbsp;based&nbsp;on&nbsp;conditions&nbsp;met</tt></dd></dl>
+ <dl><dt><a name="-book_print"><strong>book_print</strong></a>()</dt><dd><tt>prints&nbsp;all&nbsp;books&nbsp;within&nbsp;the&nbsp;database&nbsp;line&nbsp;by&nbsp;line&nbsp;through&nbsp;the&nbsp;for&nbsp;loop&nbsp;established<br>
+arguments:<br>
+none<br>
+returns<br>
+none</tt></dd></dl>
+ <dl><dt><a name="-book_retail"><strong>book_retail</strong></a>(passed_retail)</dt><dd><tt>passed&nbsp;retail&nbsp;is&nbsp;validated&nbsp;to&nbsp;exist,&nbsp;then&nbsp;the&nbsp;datatype&nbsp;is&nbsp;converted&nbsp;to&nbsp;a&nbsp;float&nbsp;to&nbsp;test&nbsp;that&nbsp;it&nbsp;is&nbsp;a&nbsp;valid&nbsp;price<br>
+arguments:<br>
+passed_retail<br>
+returns<br>
+True&nbsp;or&nbsp;False&nbsp;based&nbsp;on&nbsp;conditions&nbsp;met</tt></dd></dl>
+ <dl><dt><a name="-book_title"><strong>book_title</strong></a>(passed_title)</dt><dd><tt>passed&nbsp;title&nbsp;is&nbsp;validated&nbsp;to&nbsp;exist,&nbsp;then&nbsp;is&nbsp;returns&nbsp;true&nbsp;if&nbsp;it&nbsp;does<br>
+arguments:<br>
+passed_title<br>
+returns<br>
+True&nbsp;or&nbsp;False&nbsp;based&nbsp;on&nbsp;conditions&nbsp;met</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>author_bad_chars</strong> = ['!', '"', '@', '#', '$', '%', '^', '&amp;', '*', '(', ')', '_', '=', '+', ',', '&lt;', '&gt;', '/', '?', ';', ...]<br>
+<strong>isbn_good_chars</strong> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-']<br>
+<strong>my_db</strong> = &lt;classes.database_access.DB_Connect object&gt;</td></tr></table>
+</body></html>
