@@ -18,7 +18,7 @@ while initial_prompt != str(5):
     if initial_prompt == str(1):
         book_print()
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Show All Books\n 2. Add a Book. \n 3. Edit A Book. \n 4. Remove A Book. \n 5. Exit Program.\n  ")
-    #typing 2 will start asking users each individual piece needed to populate the database and will send them to functions that will verify that they are valid inputa
+    #typing 2 will start asking users each individual piece needed to populate the database and will send them to functions that will verify that they are valid inputs
     if initial_prompt == str(2):
         title_correct = False
         while not title_correct:
