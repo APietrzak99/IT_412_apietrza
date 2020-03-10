@@ -2,50 +2,6 @@ from classes.database_access import DB_Connect
 
 my_db = DB_Connect('root','','python_projects')
 
-# def book_add():
-#     """passed values are added to book database using a sql insert statement. if passed_retail is empty, then the default value assigned will be 0
-#     arguments:
-#     passed_title, passed_author, passed_isbn, passed_copies_purchased,passed_copies_checked_out,passed_retail
-#     returns
-#     nothing
-#     """
-#     statement = ("INSERT INTO book_info (book_title,book_author,book_isbn,book_copies_purchased,book_copies_not_checked_out,book_retail) VALUES (\""+ str(passed_title) + "\",\""+ str(passed_author) + "\",\""+ str(passed_isbn) + "\",\""+ str(passed_copies_purchased) + "\",\"" + str(passed_copies_checked_out) + "\",\"" + str(passed_retail) + "\")")
-#     my_db.executeQuery(statement)
-#     my_db.conn.commit()
-
-# def book_delete():
-#     """asks the user for the ID of a book to delete from the database, and will delete said book
-#     arguments:
-#     none
-#     returns:
-#     none
-#     """
-#     delete_prompt = input("Type the ID of the book you'd like to remove. ")
-#     if delete_prompt:
-#         confirm_input = input("Are you sure you'd like to delete this book? Y/N ")
-#         if confirm_input == "Y":
-#             try:
-#                 int(delete_prompt)
-#                 statement = ("DELETE FROM book_info WHERE book_id = " + str(delete_prompt))
-#                 my_db.executeQuery(statement)
-#                 my_db.conn.commit()
-#             except:
-#                 print("You did not enter a valid ID. Please try again. ")
-#         else:
-#             pass
-
-# def book_edit(passed_column,passed_input,passed_id):
-#     """is passed three pieces of data, that are then added to the sql statement below, which will update the record the user specified
-#     and add the new data that they have specified
-#     arguments:
-#     passed_column,passed_input,passed_id
-#     returns:
-#     none"""
-#     statement = ("UPDATE book_info SET "+ passed_column + " = \" " + passed_input + "\"WHERE book_id =\" " + passed_id + "\"")
-#     my_db.executeQuery(statement)
-#     my_db.conn.commit()
-
-
 def address_number(passed_address,address_bad_chars =  ["!",'"',"'","@","$","%","^","&","*","_","=","+","<",">","?",";","[","]","{","}"]):
     """passed address is validated to exist, then is tested for bad characters using the address_bad_chars list passed to it. if all characters within the address are good, then the return will be true
     arguments:
@@ -100,6 +56,113 @@ def company_title(passed_title):
         pass
         return True
 
+def data_add(f_name_prompt,l_name_prompt,title_prompt,address_prompt,city_prompt,state_prompt,zip_prompt,phone_prompt,second_phone_prompt,email_prompt):
+    """passed values are added to both databases using sql insert statements.
+    arguments:
+    f_name_prompt,l_name_prompt,title_prompt,address_prompt,city_prompt,state_prompt,zip_prompt,phone_prompt,second_phone_prompt,email_prompt
+    returns
+    nothing
+    """
+    if title_prompt.strip() == "":
+        title_prompt == "None"
+    if second_phone_prompt.strip() == "":
+        second_phone_prompt == "None"
+    if email_prompt.strip() == "":
+        email_prompt == "None"
+
+    statement = ("INSERT INTO crm_data (f_name,l_name,address,city,state,zip,company,primary_phone,secondary_phone,email_address) VALUES (\""+ str(f_name_prompt) + "\",\""+ str(l_name_prompt) + "\",\""+ str(address_prompt) + "\",\""+ str(city_prompt) + "\",\"" + str(state_prompt) + "\",\"" + str(zip_prompt) + "\",\"" +  str(title_prompt) + "\",\""+ str(phone_prompt)+ "\",\"" + str(second_phone_prompt)+ "\",\""+ str(email_prompt)+"\")")
+    my_db.executeQuery(statement)
+    my_db.conn.commit()
+
+    mailings_statement = ("INSERT INTO mailings (name,company,address) VALUES (\""+ str(f_name_prompt) + " "+  str(l_name_prompt) + "\",\""+ str(title_prompt)+ "\",\"" +  str(address_prompt)+"\")")
+    my_db.executeQuery(mailings_statement)
+    my_db.conn.commit()
+
+def data_delete():
+    """asks the user for the ID of a record to delete from the database they specify, 
+    and will delete said record if they pick yes on the confirm_input prompt, will ignore change if they pick no
+    arguments:
+    none
+    returns:
+    none
+    """
+    database_prompt = input("Which database would you like to remove a record from? (CRM/Mailings) ")
+    if database_prompt.title() == "Mailings":
+        delete_prompt = input("Type the ID of the record you'd like to remove. ")
+        if delete_prompt:
+            confirm_input = input("Are you sure you'd like to delete this record? Y/N ")
+            if confirm_input == "Y":
+                try:
+                    int(delete_prompt)
+                    statement = ("DELETE FROM mailings WHERE mail_ID = " + str(delete_prompt))
+                    my_db.executeQuery(statement)
+                    my_db.conn.commit()
+                except:
+                    print("You did not enter a valid ID. Please try again. ")
+            else:
+                pass
+    elif database_prompt.upper() == "CRM":
+        delete_prompt = input("Type the ID of the record you'd like to remove. ")
+        if delete_prompt:
+            confirm_input = input("Are you sure you'd like to delete this record? Y/N ")
+            if confirm_input == "Y":
+                try:
+                    int(delete_prompt)
+                    statement = ("DELETE FROM crm_data WHERE crm_ID = " + str(delete_prompt))
+                    my_db.executeQuery(statement)
+                    my_db.conn.commit()
+                except:
+                    print("You did not enter a valid ID. Please try again. ")
+            else:
+                pass
+    else:
+        print("You did not enter a valid table to remove data from. ")
+
+def data_edit(passed_column,passed_input,passed_id, passed_table):
+    """is passed four pieces of data, that are then added to the sql statement below, which will update the record the user specified
+    and add the new data that they have specified
+    arguments:
+    passed_column,passed_input,passed_id, passed_table
+    returns:
+    none"""
+    if passed_table == "crm_data":
+        statement = ("UPDATE " + passed_table + " SET "+ passed_column + " = \" " + passed_input + "\"WHERE crm_ID =\" " + passed_id + "\"")
+        my_db.executeQuery(statement)
+        my_db.conn.commit()
+    elif passed_table.title() == "Mailings":
+        statement = ("UPDATE " + passed_table + " SET "+ passed_column + " = \" " + passed_input + "\"WHERE mail_ID =\" " + passed_id + "\"")
+        my_db.executeQuery(statement)
+        my_db.conn.commit()
+
+def data_print(): 
+    """prints all data within the database the user picks line by line through the for loop established
+    arguments:
+    none
+    returns
+    none
+    """
+    database_prompt = input("Which database would you like to see all information from? (CRM/Mailings) ")
+    if database_prompt.upper() == "CRM":
+        my_result = my_db.executeSelectQuery("SELECT * FROM crm_data")
+        for record in my_result:
+            print("CRM ID: "+ str(record["crm_ID"]))
+            print("Name: " + str(record["f_name"]) + " "+ str(record["l_name"]))
+            print("Address: " + str(record["address"]))
+            print("City: " + str(record["city"]))
+            print("State: " + str(record["state"]))
+            print("ZIP: " + str(record["zip"]))
+            print("Company: " + str(record["company"]))
+            print("Primary Phone: " + str(record["primary_phone"]))
+            print("Second Phone: " + str(record["secondary_phone"]))
+            print("Email: " + str(record["email_address"])+ "\n")
+    elif database_prompt.title() == "Mailings":
+        my_result = my_db.executeSelectQuery("SELECT * FROM mailings")
+        for record in my_result:
+            print("Mail ID: "+ str(record["mail_ID"]))
+            print("Customer Name: " + record["name"])
+            print("Company: " + record["company"])
+            print("Address: " + str(record["address"])+ "\n")
+
 def email_validate(passed_email,email_bad_chars =  ["!",'"',"'","#","$","%","^","&","*","(",")","=","+",",","<",">","/","?",";",":","[","]","{","}","\\"]):
     """passed email is validated to exist, then is tested for bad characters using the email_bad_chars list passed to it. if all characters within the address are good, then the return will be true
     arguments:
@@ -120,6 +183,26 @@ def email_validate(passed_email,email_bad_chars =  ["!",'"',"'","#","$","%","^",
     else:
         pass
         return True
+
+def name_edit_validate(passed_name):
+    """ passed_name is validated to exist, then is tested for bad characters using the criteria established
+    arguments:
+    passed_name
+    returns
+    True or False based on conditions met"""
+    if passed_name:
+        name_has_bad_chars = False
+        for char in passed_name:
+            if not char.isalpha() and not char == "'" and not char == " ":
+                name_has_bad_chars = True
+        if not name_has_bad_chars:
+            return True
+        else:
+            print("You did not enter a valid name. Please try again. ")                
+            return False
+    else:
+        print("You did not enter a name. Please try again. ")
+        return False
 
 def name_validate(passed_name):
     """ passed_name is validated to exist, then is tested for bad characters using the criteria established
@@ -225,26 +308,9 @@ def zip_validate(passed_zip):
                 print("You did not enter a valid zip code. Please try again. ")                
                 return False
         else:
-            print("You entered the zip codee incorrectly. Please try again. ")
+            print("You entered the zip code incorrectly. Please try again. ")
             return False
     else:
         print("You did not enter a zip code. Please try again. ")
         return False
 
-
-# def book_print(): 
-#     """prints all books within the database line by line through the for loop established
-#     arguments:
-#     none
-#     returns
-#     none
-#     """
-#     my_result = my_db.executeSelectQuery("SELECT * FROM book_info")
-#     for record in my_result:
-#         print("Book ID: "+ str(record["book_id"]))
-#         print("Book Title: " + record["book_title"])
-#         print("Book Author: " + record["book_author"])
-#         print("Book ISBN: " + str(record["book_isbn"]))
-#         print("Book Copies Purchased: " + str(record["book_copies_purchased"]))
-#         print("Book Copies Not Checked Out: " + str(record["book_copies_not_checked_out"]))
-#         print("Book Retail: $" + str(record["book_retail"])+ "\n")
