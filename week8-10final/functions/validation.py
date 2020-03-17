@@ -1,4 +1,4 @@
-from classes.database_access import DB_Connect
+from database_access import DB_Connect
 
 my_db = DB_Connect('root','','python_projects')
 
@@ -48,7 +48,7 @@ def company_title(passed_title):
     arguments:
     passed_title
     returns
-    True or False based on conditions met
+    True
     """
     if passed_title:
         return True
@@ -78,6 +78,8 @@ def data_add(f_name_prompt,l_name_prompt,title_prompt,address_prompt,city_prompt
     my_db.executeQuery(mailings_statement)
     my_db.conn.commit()
 
+    print("\nDATA ADDED\n")
+
 def data_delete():
     """asks the user for the ID of a record to delete from the database they specify, 
     and will delete said record if they pick yes on the confirm_input prompt, will ignore change if they pick no
@@ -97,6 +99,7 @@ def data_delete():
                     statement = ("DELETE FROM mailings WHERE mail_ID = " + str(delete_prompt))
                     my_db.executeQuery(statement)
                     my_db.conn.commit()
+                    print("\nDATA DELETED\n")
                 except:
                     print("You did not enter a valid ID. Please try again. ")
             else:
@@ -111,6 +114,7 @@ def data_delete():
                     statement = ("DELETE FROM crm_data WHERE crm_ID = " + str(delete_prompt))
                     my_db.executeQuery(statement)
                     my_db.conn.commit()
+                    print("\nDATA DELETED\n")
                 except:
                     print("You did not enter a valid ID. Please try again. ")
             else:
@@ -133,6 +137,7 @@ def data_edit(passed_column,passed_input,passed_id, passed_table):
         statement = ("UPDATE " + passed_table + " SET "+ passed_column + " = \" " + passed_input + "\"WHERE mail_ID =\" " + passed_id + "\"")
         my_db.executeQuery(statement)
         my_db.conn.commit()
+    print("\nDATA EDITED\n")
 
 def data_print(): 
     """prints all data within the database the user picks line by line through the for loop established
@@ -162,6 +167,8 @@ def data_print():
             print("Customer Name: " + record["name"])
             print("Company: " + record["company"])
             print("Address: " + str(record["address"])+ "\n")
+    else:
+        print("You did not enter a valid table. ")
 
 def email_validate(passed_email,email_bad_chars =  ["!",'"',"'","#","$","%","^","&","*","(",")","=","+",",","<",">","/","?",";",":","[","]","{","}","\\"]):
     """passed email is validated to exist, then is tested for bad characters using the email_bad_chars list passed to it. if all characters within the address are good, then the return will be true

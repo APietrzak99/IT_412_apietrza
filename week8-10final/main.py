@@ -1,18 +1,22 @@
 #function imports
 from functions.validation import *
+from functions.import_file import import_file
 
 #initial input to start the program
 initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record.\n 5. Remove a record. \n 6. Exit Program.\n ")
 
-#program will keep running until the user types 5 into the initial input 
+#program will keep running until the user types 6 into the initial input 
 while initial_prompt != str(6):
+    #program will ask user to place txt file into text_files folder in program directory, where it then calls on import_file() to do the importing 
     if initial_prompt == str(1):
-        #build import structure here
+        import_input = input("Please place the file you'd like to import into the text_files folder. When you have done this, press enter. \n")
+        import_file()
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record. \n 5. Remove a record. \n 6. Exit Program.\n   ")
+    #program will call data_print() function to start asking user which table they will view, which will then print if the user enters a valid table name
     if initial_prompt == str(2):
         data_print()
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record. \n 5. Remove a record. \n 6. Exit Program.\n   ")
-    #typing 3 will start asking users each individual piece needed to populate the database and will send them to functions that will verify that they are valid inputs
+    #typing 3 will start asking users each individual piece needed to populate the database tables and will send them to functions that will verify that they are valid inputs
     if initial_prompt == str(3):
         f_name_correct = False
         while not f_name_correct:
@@ -56,6 +60,7 @@ while initial_prompt != str(6):
             email_correct = email_validate(email_prompt)
         data_add(f_name_prompt,l_name_prompt,title_prompt,address_prompt,city_prompt,state_prompt,zip_prompt,phone_prompt,second_phone_prompt,email_prompt)
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record.\n 5. Remove a record. \n 6. Exit Program.\n  ")
+    #typing 4 will start by asking users which table they'd like to edit a record in, which piece of data in the record they'd like to edit, and then the ID of which field they'd like to edit. All this is then passed to the data_edit() function
     if initial_prompt == str(4):
         table_prompt = input("Which table would you like to edit? (Mailings or CRM) ")
         edit_column_prompt = input("Please type which column you'd like to edit. ")
@@ -147,6 +152,7 @@ while initial_prompt != str(6):
         else:
             print("You did not enter a valid table to edit. ")  
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record. \n 5. Remove a record. \n 6. Exit Program.\n  ")
+ #typing 5 will call the data_delete() function, where the user is asked the questions needed to complete the deletion of a record
     if initial_prompt == str(5):
         data_delete()
         initial_prompt = input("Type the number of the option you'd like to pick. \n 1. Import a new data file\n 2. Show data currently in a database. \n 3. Add a record to the databases. \n 4. Edit a record. \n 5. Remove a record. \n 6. Exit Program.\n  ")
